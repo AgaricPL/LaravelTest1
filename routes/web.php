@@ -80,3 +80,25 @@ Route::get('posts/{postId}', function(int $postId) {
 Route::get('users/{nick}', function(string $nick = 'anonymous') {
     dd($nick);
 })->where(['nick' => '[a-z]+']);
+
+
+Route::get('elements', function () {
+    return 'Items';
+})->name('shop.items');
+
+Route::get('example', function() {
+    $url = route('shop.items');
+    dump($url);
+});
+
+
+
+Route::get('element/{id}', function ($id) {
+    return 'Element ' . $id;
+})->name('shop.item.single');
+
+Route::get('example2', function() {
+    $url = route('shop.item.single', ['id' => 33]);
+    dump($url);
+});
+
