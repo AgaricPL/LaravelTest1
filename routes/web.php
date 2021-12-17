@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\User\ShowAddress;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GameController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,88 +20,24 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/hello/{name}', [App\Http\Controllers\HelloController::class, 'hello'] );
+Route::get('users', [UserController::class, 'list'])
+    ->name('get.users');
 
 
-Route::get('/goodbye/{name}', function(string $name) {
-    return 'Goodbye: ' . $name;
-});
+Route::get('users/{id?}', [\App\Http\Controllers\User\ProfileController::class, 'show'])
+    ->name('get.user.profile');
+
+// Route::get('users/{id}/address', [App\Http\Controllers\User\ShowAddressController::class, 'showAddress']);
 
 
-// Route::get('/example', function() {
-//     return 'GET';
-// });
+Route::get('users/{id}/address', ShowAddress::class)
+    ->where(['id' => '[0-9]+']);
 
 
+// Route::resource('games', GameController::class);
+Route::resource('games', GameController::class)
+    ->only([
+        'index', 'show'
+    ]);
 
-// rest api
-$uri = '/example';
-Route::get($uri, fn() => 'Hi GET');
-Route::post($uri, fn() => 'Hi POST'); // if there is a problem with error 419 see /Applications/MAMP/htdocs/PRACA/LaravelTest1/app/Http/Kernel.php and property middlewareGroups \App\Http\Middleware\VerifyCsrfToken::class,
-Route::put($uri, fn() => 'Hi PUT');
-Route::patch($uri, fn() => 'Hi PATCH');
-Route::delete($uri, fn() => 'Hi DELETE');
-Route::options($uri, fn() => 'Hi OPTIONS');
-
-// match post and get to one function
-Route::match(['get', 'post'], '/match', function() {
-    return 'ok! it is get or post';
-});
-
-// any request
-Route::any('all', fn() => 'ALL methods allowed');
-
-$data = [
-    'data' => ['key' =>'value1'],
-    'name' => 'Rafal'
-];
-Route::view('/contact', 'contact', $data);
-
-Route::view(
-    '/view/route/var1',
-    'route.viewParam',
-    $data
-);
-
-Route::view(
-    '/viewParamRoute',
-    'route.viewParam',
-    $data
-);
-// Route::resource()
-
-Route::get('posts/{postId}', function(int $postId) {
-    dd($postId);
-});
-
-
-// Route::get('users/{nick?}', function(?string $nick = null) {
-//     dd($nick);
-// });
-
-// regexp in route
-Route::get('users/{nick}', function(string $nick = 'anonymous') {
-    dd($nick);
-})->where(['nick' => '[a-z]+']);
-
-
-Route::get('elements', function () {
-    return 'Items';
-})->name('shop.items');
-
-Route::get('example', function() {
-    $url = route('shop.items');
-    dump($url);
-});
-
-
-
-Route::get('element/{id}', function ($id) {
-    return 'Element ' . $id;
-})->name('shop.item.single');
-
-Route::get('example2', function() {
-    $url = route('shop.item.single', ['id' => 33]);
-    dump($url);
-});
 
