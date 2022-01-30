@@ -9,6 +9,7 @@
 <body>
     <div>
         <h1>Profile</h1>
+        <h2>{{ csrf_token() }}<h2>
     </div>
 </body>
 </html>

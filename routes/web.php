@@ -24,14 +24,14 @@ Route::get('users', [UserController::class, 'list'])
     ->name('get.users');
 
 
-Route::get('users/{id?}', [\App\Http\Controllers\User\ProfileController::class, 'show'])
-    ->name('get.user.profile');
+// Route::get('users/{id?}', [\App\Http\Controllers\User\ProfileController::class, 'show'])
+//     ->name('get.user.profile');
 
 // Route::get('users/{id}/address', [App\Http\Controllers\User\ShowAddressController::class, 'showAddress']);
 
 
-Route::get('users/{id}/address', ShowAddress::class)
-    ->where(['id' => '[0-9]+']);
+// Route::get('users/{id}/address', ShowAddress::class)
+//     ->where(['id' => '[0-9]+']);
 
 
 // Route::resource('games', GameController::class);
@@ -41,3 +41,14 @@ Route::resource('games', GameController::class)
     ]);
 
 
+# Route::get('testShow/{id}', [UserController::class, 'testShow']);
+
+Route::match(['get','post'], 'testShow/{id}', [UserController::class, 'testShow']);
+
+Route::any('users/testStore/{id?}', [UserController::class, 'testStore'])
+    ->name('post.user.test.show');
+// users/testStore/305
+
+
+Route::get('getToken', [UserController::class, 'getToken'])
+    ->name('user.getToken');
