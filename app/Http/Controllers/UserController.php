@@ -16,7 +16,31 @@ class UserController extends Controller
 
     public function testShow(Request $request, int $id)
     {
-        return 'text User: '.$id;
+        // return 'text User: '.$id;
+
+        // return \response(
+        //     "<h2>jakis tekst</h2>",
+        //     200,
+        //     ['Content-Type' => 'text/plain']
+        // );
+
+        // return \response("<b>jakies super text</b>")
+        //     ->setStatusCode(200)
+        //     ->header('Content-Type', 'text/html')
+        //     ->header('Own-Header', 'Laravel');
+
+        // return \redirect()->route('user.getToken');
+
+        // return \redirect()->route('address', ['id' => $id]);
+
+        // return \redirect()->action([UserController::class, 'list']);
+
+        // return \redirect()->away('https:://www.google.pl');
+
+        // return view('user.profile', ['id' => $id]);
+
+        return \response()->json(['id' => $id]);
+
     }
 
     public function testStore(Request $request, ?int $id = 0)

@@ -30,8 +30,9 @@ Route::get('users', [UserController::class, 'list'])
 // Route::get('users/{id}/address', [App\Http\Controllers\User\ShowAddressController::class, 'showAddress']);
 
 
-// Route::get('users/{id}/address', ShowAddress::class)
-//     ->where(['id' => '[0-9]+']);
+Route::get('users/{id}/address', ShowAddress::class)
+    ->where(['id' => '[0-9]+'])
+    ->name('address');
 
 
 // Route::resource('games', GameController::class);
@@ -43,7 +44,7 @@ Route::resource('games', GameController::class)
 
 # Route::get('testShow/{id}', [UserController::class, 'testShow']);
 
-Route::match(['get','post'], 'testShow/{id}', [UserController::class, 'testShow']);
+Route::match(['get','post'], 'users/test/{id}', [UserController::class, 'testShow']);
 
 Route::any('users/testStore/{id?}', [UserController::class, 'testStore'])
     ->name('post.user.test.show');
