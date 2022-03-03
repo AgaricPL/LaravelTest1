@@ -1,64 +1,39 @@
 @extends('layout.main')
 
-@section('container')
-<table>
-<thead>
-    <tr>
-        <th>Index</th>
-        <th>Iteration</th>
-        <th>Id</th>
-        <th>Name</th>
-        <th>Option</th>
-    </tr>
-</thead>
-<tbody>
-    @foreach ( $users as $user)
-        @include('user.listRow', ['userData' => $user])
-    @endforeach
-
-</tbody>
-</thead>
-
-
-
-</table>
-<hr><hr>
-
-<div>
-    <table>
-        <thead>
-            <tr>
-                <th>Index</th>
-                <th>Iteration</th>
-                <th>Id</th>
-                <th>Nick</th>
-                <th>Options</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-            <td colspan="5">@ foreach</td>
-            </tr>
-            @foreach ($users as $user )
-                @include('user.listRow', ['userData' => $user])
-            @endforeach
-
-            <tr>
-            <td colspan="5">@ forelse</td>
-            </tr>
-            @forelse ($users as $user)
-                @include('user.listRow', ['userData' => $user])
-            @empty
-                <tr>
-                    <td colspan="5">Empty @ forelse</td>
-                </tr>
-            @endforelse
-            <tr>
-            <td colspan="5">@ each</td>
-            </tr>
-            @each('user.listRow', $users, 'userData', 'view.empty')
-
-        </tbody>
-    </table>
-</div>
+@section('content')
+    <div class="card">
+        <div class="card-header"><i class="fas fa-table mr-1"></i>Lista użytkowników</div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Lp</th>
+                            <th>Id</th>
+                            <th>Nick</th>
+                            <th>Opcje</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Lp</th>
+                            <th>Id</th>
+                            <th>Nick</th>
+                            <th>Opcje</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach($users as $user)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $user['id'] }}</td>
+                                <td>{{ $user['name'] }}</td>
+                                <td><a href="{{ route('get.user.show', ['userId' => $user['id']]) }}">Szczegóły</a></td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 @endsection

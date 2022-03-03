@@ -4,6 +4,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\User\ShowAddress;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GameController;
+use App\Http\Controllers\Home\MainPage;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,9 +17,8 @@ use App\Http\Controllers\GameController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', MainPage::class)
+    ->name('home.mainPage');
 
 
 Route::get('users/list', [UserController::class, 'list']);
@@ -30,8 +30,8 @@ Route::get('users/{userId}', [UserController::class, 'show'])
 
 Route::get('user/test/{id?}', [UserController::class, 'testShow']);
 
-// Route::get('users', [UserController::class, 'list'])
-//     ->name('get.users');
+Route::get('users', [UserController::class, 'list'])
+    ->name('get.users');
 
 
 // Route::get('users/{id?}', [\App\Http\Controllers\User\ProfileController::class, 'show'])

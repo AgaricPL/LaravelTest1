@@ -1,36 +1,25 @@
 @extends('layout.main')
 
-@section('title', 'Użtkownik')
+@section('title', 'Użytkownik')
 
-
-@auth
-    Użytkownik jest zalogowany
-@endauth
-
-@guest
-    Zaloguj się!
-@endguest
-
-@section('content')
-    <h2>{{ csrf_token() }}<h2>
-    @isset($userId)
-        <h2>{{ $userId }}</h2>
-    @endisset
-
-    <ul>
-        <li>{{ $userDetails['id'] }}</li>
-        <li>{{ $userDetails['firstName'] }}</li>
-        <li>{{ $userDetails['lastName'] }}</li>
-        <li>{{ $userDetails['city'] }}</li>
-        <li>
-            {{ $userDetails['age'] }}
-            @if ($userDetails['age'] >= 18)
-                Osoba dorosła
-            @else
-                Osoba niepełnoletnia
-            @endif
-        </li>
-        <li>{!! $userDetails['html'] !!}</li>
-    </ul>
+@section('sidebar')
+    @parent
+    <div>Lista użytkowników: <a href="{{ route('get.users') }}">Link</a></div>
 @endsection
 
+@section('content')
+    <div class="card">
+        <h5 class="card-header">{{ $user['name'] }}</h5>
+        <div class="card-body">
+            <ul>
+                <li>Id: {{ $user['id'] }}</li>
+                <li>Imię: {{ $user['firstName'] }}</li>
+                <li>Nazwisko: {{ $user['lastName'] }}</li>
+                <li>Miasto: {{ $user['city'] }}</li>
+                <li>Wiek: {{ $user['age'] }}</li>
+            </ul>
+
+            <a href="{{ route('get.users') }}" class="btn btn-light">Lista użytkowników</a>
+        </div>
+    </div>
+@endsection

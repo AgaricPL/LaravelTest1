@@ -1,15 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <div>
-        <h1>Profile</h1>
-        <h2>{{ csrf_token() }}<h2>
-    </div>
-</body>
+<html>
+    <h1>Application: {{ $applicationName }}</h1>
+    <h2>Profil</h2>
+    <ul>
+        <li>Name: Tomaaa</li>
+    </ul>
 </html>
