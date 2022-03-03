@@ -20,8 +20,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('users', [UserController::class, 'list'])
-    ->name('get.users');
+
+Route::get('users/list', [UserController::class, 'list']);
+
+Route::get('users/{userId}', [UserController::class, 'show'])
+    ->name('get.user.show');
+
+
+
+Route::get('user/test/{id?}', [UserController::class, 'testShow']);
+
+// Route::get('users', [UserController::class, 'list'])
+//     ->name('get.users');
 
 
 // Route::get('users/{id?}', [\App\Http\Controllers\User\ProfileController::class, 'show'])
@@ -30,24 +40,24 @@ Route::get('users', [UserController::class, 'list'])
 // Route::get('users/{id}/address', [App\Http\Controllers\User\ShowAddressController::class, 'showAddress']);
 
 
-Route::get('users/{id}/address', ShowAddress::class)
-    ->where(['id' => '[0-9]+'])
-    ->name('address');
+// Route::get('users/{id}/address', ShowAddress::class)
+//     ->where(['id' => '[0-9]+'])
+//     ->name('address');
 
 
 // Route::resource('games', GameController::class);
-Route::resource('games', GameController::class)
-    ->only([
-        'index', 'show'
-    ]);
+// Route::resource('games', GameController::class)
+//     ->only([
+//         'index', 'show'
+//     ]);
 
 
 # Route::get('testShow/{id}', [UserController::class, 'testShow']);
 
-Route::match(['get','post'], 'users/test/{id}', [UserController::class, 'testShow']);
+// Route::match(['get','post'], 'users/test/{id}', [UserController::class, 'testShow']);
 
-Route::any('users/testStore/{id?}', [UserController::class, 'testStore'])
-    ->name('post.user.test.show');
+// Route::any('users/testStore/{id?}', [UserController::class, 'testStore'])
+//     ->name('post.user.test.show');
 // users/testStore/305
 
 
