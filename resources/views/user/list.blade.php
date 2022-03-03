@@ -58,16 +58,6 @@
             </tr>
             @each('user.listRow', $users, 'userData', 'view.empty')
 
-            @switch($type)
-                @case(1)
-
-                    @break
-                @case(2)
-
-                    @break
-                @default
-
-            @endswitch
         </tbody>
     </table>
 </div>

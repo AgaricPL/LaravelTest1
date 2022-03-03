@@ -1,6 +1,5 @@
 
 <tr>
-
     @if (isset($loop) && is_object($loop))
         <td>{{ $loop->index }}</td>
         <td>{{ $loop->iteration }}</td>
